@@ -1,0 +1,1 @@
+## Mingw-w64 (Compilador GCC C11)
