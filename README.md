@@ -6,6 +6,4 @@
 
 ## Legajo: 176.244-8
 
-## Neira
-
-## Juan Cruz
+## Juan Cruz Neira, Javier Capristo
