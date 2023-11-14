@@ -20,10 +20,10 @@ letra			[a-zA-Z]
 "+"				{return (ADICION);}
 "-"				{return (RESTA);}
 ":="			{return (ASIGNACION);}
-";"				{return (FINSENTENCIA);}
+";"				{return (PUNTOYCOMA);}
 ","				{return (COMA);}
-"("				{return (APERTURAPARENTESIS);}
-")"				{return (CIERREPARENTESIS);}
+"("				{return (PARENIZQUIERDO);}
+")"				{return (PARENDERECHO);}
 {constante}		{yylval.constante = atoi(yytext); return (CONSTANTE);}
 {identificador}	{yylval.identificador = yytext; return (ID);}
 
