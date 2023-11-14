@@ -6,7 +6,7 @@
 	void error();
 %}
 
-identificador	[a-zA-z][a-zA-Z0-9]{0-30}
+identificador	[a-zA-z][a-zA-Z0-9]{0,30}
 constante		[0-9]+
 digito 			[0-9]
 letra			[a-zA-Z]
@@ -50,7 +50,7 @@ void error(char *elemento, int longitudElemento) {
 			}
 	}
 	else {
-		if longitudElemento == 1{
+		if (longitudElemento == 1) {
 			printf("Error: Carácter no válido para identificadores o constantes.\n");
 			return;
 		}
