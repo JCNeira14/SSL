@@ -2,6 +2,7 @@
 	#include <stdio.h>
 	#include <string.h>
 	#include "sintactico.tab.h"
+	#include <ctype.h>
 	void error();
 %}
 
@@ -9,8 +10,6 @@ identificador	[a-zA-z][a-zA-Z0-9]{0-30}
 constante		[0-9]+
 digito 			[0-9]
 letra			[a-zA-Z]
-
-
 
 %%
 
@@ -28,14 +27,36 @@ letra			[a-zA-Z]
 {constante}		{yylval.constante = atoi(yytext); return (CONSTANTE);}
 {identificador}	{yylval.identificador = yytext; return (ID);}
 
-.				{error(); return (ERROR);}
+.				{error(yytext, yylen); return (ERROR);}
 
 %%
 
-/*
-Error de identificador: Caracter erroneo, longitud excedida, empieza con numero.
-*/
-void error (char * otro){
-	printf("<<Error lexico: "%s" >>", otro)
-}
+void error(char *elemento, int longitudElemento) {
+	//longitudElemento = strlen(elemento);
 
+	// Verificar si intenta ser un identificador
+    if (isalpha(elemento[0]) && longitudElemento > 1) {
+		if (longitudElemento > 32) {
+			printf("Error: Longitud del identificador excedida (máximo 32 caracteres).\n");
+			return;
+		}
+
+		// Verificar el resto de los caracteres son letras
+		for (int i = 1; i <= longitudElemento; i++) {
+			if (!isalnum(elemento[i])) {
+					printf("Error: Carácter no válido en la posición %d.\n", i + 1);
+					return;
+				}
+			}
+	}
+	else {
+		if longitudElemento == 1{
+			printf("Error: Carácter no válido para identificadores o constantes.\n");
+			return;
+		}
+		else {
+			printf("Error: El identificador comienza con un caracter invalido.\n");
+			return;
+		}
+	}
+}
