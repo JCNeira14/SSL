@@ -28,7 +28,7 @@ letra           [a-zA-Z]
 {constante}     { yylval.entero = atoi(yytext); return CONSTANTE; }
 {identificador} { yylval.identificador = strdup(yytext); return ID; }
 
-.               { error(yytext, yylen); return ERROR; } // Caracteres no válidos
+.               { error(yytext, yyleng); return ERROR; } // Caracteres no válidos
 
 %%
 
