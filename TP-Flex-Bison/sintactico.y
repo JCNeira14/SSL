@@ -14,14 +14,19 @@ int yyerror(char *s);
     //char *entero;
 }
 
+%nonassoc LISTAIDENTIFICADORES
+
+/* %token <entero> CONSTANTE
+%token <identificador> ID 
+%token <reservada> INICIO FIN LEER ESCRIBIR ADICION RESTA ASIGNACION PUNTOYCOMA COMA PARENIZQUIERDO PARENDERECHO FDT */
+
 %token <entero> CONSTANTE
 %token <identificador> ID 
 %token <reservada> INICIO FIN LEER ESCRIBIR ADICION RESTA ASIGNACION PUNTOYCOMA COMA PARENIZQUIERDO PARENDERECHO FDT
 
-%type <reservada> PROGRAMA LISTASENTENCIAS SENTENCIA LISTAEXPRESIONES EXPRESION PRIMARIA
-
-%nonassoc LISTAIDENTIFICADORES
-
+%type <reservada> PROGRAMA SENTENCIA
+%type <identificador> LISTAIDENTIFICADORES ID PRIMARIA
+%type <entero> EXPRESION
 %%
 
 objetivo: PROGRAMA FDT { printf("Análisis sintáctico exitoso.\n"); };
