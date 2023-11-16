@@ -3,15 +3,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 int yylex();
-int yyerror(char *s)
+int yyerror(char *s);
 
 %}
 
 %union {
-    int constante;
+    int entero;
     char *identificador;
     char *reservada;
-    char *entero;
+    //char *entero;
 }
 
 %token <entero> CONSTANTE
