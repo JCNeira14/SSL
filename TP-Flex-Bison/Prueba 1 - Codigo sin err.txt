@@ -1,0 +1,4 @@
+inicio
+variable := 42;
+escribir(variable + 10);
+fin
