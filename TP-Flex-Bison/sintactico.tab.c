@@ -74,7 +74,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 int yylex();
-int yyerror(char *s)
+int yyerror(char *s);
 
 
 
@@ -132,10 +132,10 @@ typedef union YYSTYPE
 /* Line 214 of yacc.c  */
 #line 10 "sintactico.y"
 
-    int constante;
+    int entero;
     char *identificador;
     char *reservada;
-    char *entero;
+    //char *entero;
 
 
 

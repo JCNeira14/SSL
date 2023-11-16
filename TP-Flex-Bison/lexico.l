@@ -25,7 +25,7 @@ letra           [a-zA-Z]
 ","             { return COMA; }
 "("             { return PARENIZQUIERDO; }
 ")"             { return PARENDERECHO; }
-{constante}     { yylval.constante = atoi(yytext); return CONSTANTE; }
+{constante}     { yylval.entero = atoi(yytext); return CONSTANTE; }
 {identificador} { yylval.identificador = strdup(yytext); return ID; }
 
 .               { error(yytext, yylen); return ERROR; } // Caracteres no válidos
