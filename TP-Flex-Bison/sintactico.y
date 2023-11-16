@@ -7,6 +7,7 @@
     int constante;
     char *identificador;
     char *reservada;
+    char *entero
 }
 
 %token <entero> CONSTANTE
