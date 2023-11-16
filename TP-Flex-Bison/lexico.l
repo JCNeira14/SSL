@@ -1,13 +1,12 @@
 %{
 #include <stdio.h>
 #include <string.h>
-#include "sintactico.tab.h" // Archivo de encabezado generado por Bison
+#include "sintactico.tab.h" //Archivo de encabezado generado por Bison
 #include <ctype.h>
 
-void error(); // Declaración de la función de manejo de errores
+void error(); //Declaración de la función de manejo de errores
 %}
 
-// Definición de patrones
 identificador   [a-zA-Z][a-zA-Z0-9]{0,31}
 constante       [0-9]+
 digito          [0-9]
@@ -33,7 +32,7 @@ letra           [a-zA-Z]
 
 %%
 
-// Función para manejar errores léxicos
+//Función para manejar errores léxicos
 void error(char *elemento, int longitudElemento) {
     // Imprimir información de error con número de línea y posición
     fprintf(stderr, "Error en la línea %d, posición %d: ", yylineno, (int)(elemento - yytext + 1));
