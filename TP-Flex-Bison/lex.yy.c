@@ -709,7 +709,7 @@ YY_RULE_SETUP
 case 12:
 YY_RULE_SETUP
 #line 28 "lexico.l"
-{ yylval.constante = atoi(yytext); return CONSTANTE; }
+{ yylval.entero = atoi(yytext); return CONSTANTE; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
@@ -719,7 +719,7 @@ YY_RULE_SETUP
 case 14:
 YY_RULE_SETUP
 #line 31 "lexico.l"
-{ error(yytext, yylen); return ERROR; } // Caracteres no válidos
+{ error(yytext, yyleng); return ERROR; } // Caracteres no válidos
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
