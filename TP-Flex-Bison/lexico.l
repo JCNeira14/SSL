@@ -4,7 +4,7 @@
 #include "sintactico.tab.c" //Archivo de encabezado generado por Bison
 #include <ctype.h>
 
-void error(); //Declaración de la función de manejo de errores
+void error(char *elemento, int longitudElemento); //Declaración de la función de manejo de errores
 %}
 
 identificador   [a-zA-Z][a-zA-Z0-9]{0,31}
