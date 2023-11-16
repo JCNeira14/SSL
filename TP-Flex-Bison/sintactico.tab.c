@@ -131,7 +131,7 @@ typedef union YYSTYPE
     int constante;
     char *identificador;
     char *reservada;
-    char *entero
+    char *entero;
 
 
 

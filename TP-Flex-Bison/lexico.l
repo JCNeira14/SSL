@@ -1,7 +1,7 @@
 %{
 #include <stdio.h>
 #include <string.h>
-#include "sintactico.tab.h" //Archivo de encabezado generado por Bison
+#include "sintactico.tab.c" //Archivo de encabezado generado por Bison
 #include <ctype.h>
 
 void error(); //Declaración de la función de manejo de errores
