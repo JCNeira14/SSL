@@ -1,6 +1,10 @@
 %{
+
 #include <stdio.h>
 #include <stdlib.h>
+int yylex();
+int yyerror(char *s)
+
 %}
 
 %union {
