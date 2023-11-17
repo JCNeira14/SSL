@@ -405,9 +405,9 @@ static char *yy_last_accepting_cpos;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "lexico.l"
+#line 1 "scanner.l"
 #define INITIAL 0
-#line 2 "lexico.l"
+#line 2 "scanner.l"
 #include <stdio.h>
 #include <string.h>
 #include "sintactico.tab.c" //Archivo de encabezado generado por Bison
@@ -565,7 +565,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 15 "lexico.l"
+#line 15 "scanner.l"
 
 
 #line 572 "lex.yy.c"
@@ -653,77 +653,77 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 17 "lexico.l"
+#line 17 "scanner.l"
 { yylval.reservada = strdup(yytext); return INICIO; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 18 "lexico.l"
+#line 18 "scanner.l"
 { yylval.reservada = strdup(yytext); return FIN; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 19 "lexico.l"
+#line 19 "scanner.l"
 { yylval.reservada = strdup(yytext); return LEER; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 20 "lexico.l"
+#line 20 "scanner.l"
 { yylval.reservada = strdup(yytext); return ESCRIBIR; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 21 "lexico.l"
+#line 21 "scanner.l"
 { return ADICION; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 22 "lexico.l"
+#line 22 "scanner.l"
 { return RESTA; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 23 "lexico.l"
+#line 23 "scanner.l"
 { return ASIGNACION; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 24 "lexico.l"
+#line 24 "scanner.l"
 { return PUNTOYCOMA; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 25 "lexico.l"
+#line 25 "scanner.l"
 { return COMA; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 26 "lexico.l"
+#line 26 "scanner.l"
 { return PARENIZQUIERDO; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 27 "lexico.l"
+#line 27 "scanner.l"
 { return PARENDERECHO; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 28 "lexico.l"
+#line 28 "scanner.l"
 { yylval.entero = atoi(yytext); return CONSTANTE; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 29 "lexico.l"
+#line 29 "scanner.l"
 { yylval.identificador = strdup(yytext); return ID; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 31 "lexico.l"
+#line 31 "scanner.l"
 { error(yytext, yyleng); return ERROR; } // Caracteres no válidos
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 33 "lexico.l"
+#line 33 "scanner.l"
 ECHO;
 	YY_BREAK
 #line 730 "lex.yy.c"
@@ -1612,7 +1612,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 33 "lexico.l"
+#line 33 "scanner.l"
 
 
 //Función para manejar errores léxicos
