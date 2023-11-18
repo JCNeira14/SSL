@@ -1,7 +1,7 @@
 %{
 #include <stdio.h>
 #include <string.h>
-#include "sintactico.tab.c" //Archivo de encabezado generado por Bison
+#include "parser.tab.c" //Archivo de encabezado generado por Bison
 #include <ctype.h>
 
 void error(char *elemento, int longitudElemento); //Declaración de la función de manejo de errores
@@ -27,6 +27,7 @@ letra           [a-zA-Z]
 ")"             { return PARENDERECHO; }
 {constante}     { yylval.entero = atoi(yytext); return CONSTANTE; }
 {identificador} { yylval.identificador = strdup(yytext); return ID; }
+
 
 .               { error(yytext, yyleng); return ERROR; } // Caracteres no válidos
 
@@ -60,4 +61,3 @@ void error(char *elemento, int longitudElemento) {
         }
     }
 }
-

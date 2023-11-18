@@ -6,13 +6,11 @@ int yylex();
 int yyerror(char *s);
 
 %}
-%token <entero> CONSTANTE
-%token <identificador> ID 
-%token <reservada> INICIO FIN LEER ESCRIBIR ADICION RESTA ASIGNACION PUNTOYCOMA COMA PARENIZQUIERDO PARENDERECHO FDT
+%token INICIO FIN LEER ESCRIBIR ADICION RESTA ASIGNACION COMA PUNTOYCOMA PARENIZQUIERDO PARENDERECHO CONSTANTE ID
 %%
 
-objetivo: PROGRAMA FDT { printf("Análisis sintáctico exitoso.\n"); };
-        // | error FDT { fprintf(stderr, "Error: Análisis sintáctico fallido.\n"); exit(EXIT_FAILURE); }
+objetivo: PROGRAMA { printf("Análisis sintáctico exitoso.\n"); };
+        /* | error { fprintf(stderr, "Error: Análisis sintáctico fallido.\n"); exit(EXIT_FAILURE); } */
 
 PROGRAMA: INICIO LISTASENTENCIAS FIN;
 
