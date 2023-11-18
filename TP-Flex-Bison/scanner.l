@@ -4,13 +4,13 @@
 #include <stdio.h>
 #include <ctype.h>
 #include "parser.tab.c" // Archivo de encabezado generado por Bison
-#define TOKEN_ERROR -1 // Definición de un token de error
+#define EXIT_ERROR -1 // Definición de un token de error
 
 void error(char *elemento, int longitudElemento); // Declaración de la función de manejo de errores
 %}
 
 option noyywrap
-blanco          [ \t\n\r]
+espacios        [ \t\n\r]+
 identificador   [a-zA-Z][a-zA-Z0-9]{0,31}
 constante       [0-9]+
 
@@ -23,8 +23,8 @@ constante       [0-9]+
 ":="            { return ASIGNACION; }
 {constante}     { yylval.entero = atoi(yytext); return CONSTANTE; }
 {identificador} { yylval.identificador = strdup(yytext); return ID; }
-{blanco}+       ; // Saltar espacios en blanco
-.               { error(yytext, yyleng); return TOKEN_ERROR; } // Caracteres no válidos
+{espacios}      ; // Saltar espacios en blanco
+.               { error(yytext, yyleng); return EXIT_ERROR; } // Caracteres no válidos
 
 %%
 
@@ -55,4 +55,9 @@ void error(char *elemento, int longitudElemento) {
             fprintf(stderr, "El identificador comienza con un caracter inválido.\n");
         }
     }
+}
+
+int main() {
+    yylex();
+    return 0;
 }
