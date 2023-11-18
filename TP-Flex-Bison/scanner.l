@@ -27,6 +27,12 @@ constante       [0-9]+
 "fin"           { yylval.reservada = strdup(yytext); return FIN; }
 "leer"          { yylval.reservada = strdup(yytext); return LEER; }
 "escribir"      { yylval.reservada = strdup(yytext); return ESCRIBIR; }
+"("             return '(';
+")"             return ')';
+","             return ',';
+"+"             return '+';
+"-"             return '-';
+";"             return ';';
 ":="            { yylval.asignacion = strdup(yytext); return ASIGNACION; }
 {constante}     { yylval.constante = atoi(yytext); return CONSTANTE; }
 {identificador} { yylval.identificador = strdup(yytext); return ID; }
