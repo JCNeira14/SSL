@@ -23,16 +23,18 @@ extern int yylex();
 %%
 
 objetivo: PROGRAMA { printf("Análisis sintáctico exitoso.\n"); }
-        | error { fprintf(stderr, "Error: Análisis sintáctico fallido.\n"); exit(EXIT_FAILURE); }
+        | error { fprintf(stderr, "Error: Análisis sintáctico fallido.\n"); exit(EXIT_FAILURE); };
 
-PROGRAMA: INICIO LISTASENTENCIAS FIN;
+PROGRAMA: INICIO { printf("Se leyo inicio: %s\n", $1); } LISTASENTENCIAS { printf("Se leyo lista sentencias \n", $1); } FIN;
 
-LISTASENTENCIAS: SENTENCIA
-        | LISTASENTENCIAS SENTENCIA;
+LISTASENTENCIAS:
+        | SENTENCIA LISTASENTENCIAS;
+
 
 SENTENCIA: ID ASIGNACION EXPRESION ';' { printf("Asignación de valor a la variable %s.\n", $1); }
-        | LEER '(' LISTAIDENTIFICADORES ')' ';'
-        | ESCRIBIR '(' LISTAEXPRESIONES ')' ';';
+        | LEER '(' LISTAIDENTIFICADORES ')' ';' { printf("Lectura de variables\n"); }
+        | ESCRIBIR '(' LISTAEXPRESIONES ')' ';' { printf("Escritura de expresiones\n"); }
+        ;
 
 LISTAIDENTIFICADORES: ID
         | LISTAIDENTIFICADORES ',' ID;
