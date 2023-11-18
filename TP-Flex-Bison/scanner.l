@@ -2,17 +2,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "parser.tab.h"
+#include <ctype.h>
+#include "parser.tab.c"
 extern int yylineno;
 #define EXIT_ERROR -1
 
-int yywrap(void);
 int yylex(void);
 void especificarError(char *elemento, int longitudElemento); // Declaración de la función de manejo de errores
 
 %}
 
-option noyywrap
+%option noyywrap
+%option noinput nounput
+
 espacios        [ \t\n\r]+
 identificador   [a-zA-Z][a-zA-Z0-9]{0,31}
 constante       [0-9]+

@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "parser.tab.h"
 extern int yylex();
+extern int yyerror(char *s);
 
 %}
 
@@ -55,7 +55,4 @@ int main()
         return(yyparse());
 }
 
-void yyerror(char* s)
-{
-        fprintf(stderr, "%s\n", s);
-}
+
