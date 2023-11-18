@@ -74,12 +74,11 @@
 #include <stdlib.h>
 #include <string.h>
 extern int yylex();
-extern int yyerror(char *s);
 
 
 
 /* Line 189 of yacc.c  */
-#line 83 "parser.tab.c"
+#line 82 "parser.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -123,7 +122,7 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 10 "parser.y"
+#line 9 "parser.y"
 
         int constante;
         char *identificador;
@@ -133,7 +132,7 @@ typedef union YYSTYPE
 
 
 /* Line 214 of yacc.c  */
-#line 137 "parser.tab.c"
+#line 136 "parser.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -145,7 +144,7 @@ typedef union YYSTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 149 "parser.tab.c"
+#line 148 "parser.tab.c"
 
 #ifdef short
 # undef short
@@ -434,8 +433,8 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    24,    24,    25,    27,    29,    30,    32,    33,    34,
-      36,    37,    39,    40,    42,    44,    45,    46,    48,    49
+       0,    25,    25,    26,    28,    30,    31,    33,    34,    35,
+      37,    38,    40,    41,    43,    45,    46,    47,    49,    50
 };
 #endif
 
@@ -1352,28 +1351,28 @@ yyreduce:
         case 2:
 
 /* Line 1455 of yacc.c  */
-#line 24 "parser.y"
+#line 25 "parser.y"
     { printf("Análisis sintáctico exitoso.\n"); ;}
     break;
 
   case 3:
 
 /* Line 1455 of yacc.c  */
-#line 25 "parser.y"
+#line 26 "parser.y"
     { fprintf(stderr, "Error: Análisis sintáctico fallido.\n"); exit(EXIT_FAILURE); ;}
     break;
 
   case 7:
 
 /* Line 1455 of yacc.c  */
-#line 32 "parser.y"
+#line 33 "parser.y"
     { printf("Asignación de valor a la variable %s.\n", (yyvsp[(1) - (4)].identificador)); ;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1377 "parser.tab.c"
+#line 1376 "parser.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1585,7 +1584,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 51 "parser.y"
+#line 52 "parser.y"
 
 
 int main()
@@ -1593,5 +1592,8 @@ int main()
         return(yyparse());
 }
 
-
+void yyerror(char* s)
+{
+        fprintf(stderr,"%s\n",s);
+}
 

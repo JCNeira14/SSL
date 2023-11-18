@@ -3,12 +3,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "parser.tab.c"
+#include "parser.tab.h"
 extern int yylineno;
 #define EXIT_ERROR -1
 
 int yylex(void);
 void especificarError(char *elemento, int longitudElemento); // Declaración de la función de manejo de errores
+int yylineno = 1;
+
 
 %}
 

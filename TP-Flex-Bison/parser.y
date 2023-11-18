@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 extern int yylex();
-extern int yyerror(char *s);
 
 %}
 
@@ -18,6 +17,8 @@ extern int yyerror(char *s);
 %token <constante> CONSTANTE
 %token <identificador> ID
 %token <asignacion> ASIGNACION
+
+%start objetivo
 
 %%
 
@@ -55,4 +56,7 @@ int main()
         return(yyparse());
 }
 
-
+void yyerror(char* s)
+{
+        fprintf(stderr,"%s\n",s);
+}
