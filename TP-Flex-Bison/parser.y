@@ -3,38 +3,38 @@
 #include <stdio.h>
 #include <stdlib.h>
 int yylex();
-int yyerror(char *s);
+//int yyerror(char *s);
 
 %}
-%token INICIO FIN LEER ESCRIBIR ADICION RESTA ASIGNACION COMA PUNTOYCOMA PARENIZQUIERDO PARENDERECHO CONSTANTE ID
+%token INICIO FIN LEER ESCRIBIR ASIGNACION CONSTANTE ID
 %%
 
 objetivo: PROGRAMA { printf("Análisis sintáctico exitoso.\n"); };
-        /* | error { fprintf(stderr, "Error: Análisis sintáctico fallido.\n"); exit(EXIT_FAILURE); } */
+        // | error { fprintf(stderr, "Error: Análisis sintáctico fallido.\n"); exit(EXIT_FAILURE); }
 
 PROGRAMA: INICIO LISTASENTENCIAS FIN;
 
 LISTASENTENCIAS: SENTENCIA
                | LISTASENTENCIAS SENTENCIA;
 
-SENTENCIA: ID ASIGNACION EXPRESION PUNTOYCOMA { printf("Asignación de valor a la variable %s.\n", $1); }
-         | LEER PARENIZQUIERDO LISTAIDENTIFICADORES PARENDERECHO PUNTOYCOMA
-         | ESCRIBIR PARENIZQUIERDO LISTAEXPRESIONES PARENDERECHO PUNTOYCOMA;
+SENTENCIA: ID ASIGNACION EXPRESION ';' { printf("Asignación de valor a la variable %s.\n", $1); }
+         | LEER '(' LISTAIDENTIFICADORES ')' ';'
+         | ESCRIBIR '(' LISTAEXPRESIONES ')' ';';
 
 LISTAIDENTIFICADORES: ID
-                    | LISTAIDENTIFICADORES COMA ID;
+                    | LISTAIDENTIFICADORES ',' ID;
 
 LISTAEXPRESIONES: EXPRESION
-                | LISTAEXPRESIONES COMA EXPRESION;
+                | LISTAEXPRESIONES ',' EXPRESION;
 
 EXPRESION: PRIMARIA OPERADOR PRIMARIA;
 
 PRIMARIA: ID
         | CONSTANTE
-        | PARENIZQUIERDO EXPRESION PARENDERECHO;
+        | '(' EXPRESION ')';
 
-OPERADOR: ADICION
-        | RESTA;
+OPERADOR: '+'
+        | '-';
 
 %%
 

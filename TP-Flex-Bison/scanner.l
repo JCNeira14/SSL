@@ -1,16 +1,18 @@
 %{
 #include <stdio.h>
 #include <string.h>
-#include "parser.tab.c" //Archivo de encabezado generado por Bison
+#include <stdio.h>
 #include <ctype.h>
+#include "parser.tab.c" // Archivo de encabezado generado por Bison
+#define TOKEN_ERROR -1 // Definición de un token de error
 
-void error(char *elemento, int longitudElemento); //Declaración de la función de manejo de errores
+void error(char *elemento, int longitudElemento); // Declaración de la función de manejo de errores
 %}
 
+option noyywrap
+blanco          [ \t\n\r]
 identificador   [a-zA-Z][a-zA-Z0-9]{0,31}
 constante       [0-9]+
-digito          [0-9]
-letra           [a-zA-Z]
 
 %%
 
@@ -18,22 +20,15 @@ letra           [a-zA-Z]
 "fin"           { yylval.reservada = strdup(yytext); return FIN; }
 "leer"          { yylval.reservada = strdup(yytext); return LEER; }
 "escribir"      { yylval.reservada = strdup(yytext); return ESCRIBIR; }
-"+"             { return ADICION; }
-"-"             { return RESTA; }
 ":="            { return ASIGNACION; }
-";"             { return PUNTOYCOMA; }
-","             { return COMA; }
-"("             { return PARENIZQUIERDO; }
-")"             { return PARENDERECHO; }
 {constante}     { yylval.entero = atoi(yytext); return CONSTANTE; }
 {identificador} { yylval.identificador = strdup(yytext); return ID; }
-
-
-.               { error(yytext, yyleng); return ERROR; } // Caracteres no válidos
+{blanco}+       ; // Saltar espacios en blanco
+.               { error(yytext, yyleng); return TOKEN_ERROR; } // Caracteres no válidos
 
 %%
 
-//Función para manejar errores léxicos
+// Función para manejar errores léxicos
 void error(char *elemento, int longitudElemento) {
     // Imprimir información de error con número de línea y posición
     fprintf(stderr, "Error en la línea %d, posición %d: ", yylineno, (int)(elemento - yytext + 1));
