@@ -1,24 +1,28 @@
 %{
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "parser.tab.h"
 extern int yylex();
-extern void yyerror(const char *s);
-
-int yyerror(const char *msg) {
-        fprintf(stderr, "Error sintáctico en la línea %d: %s\n", yylineno, msg);
-        exit(EXIT_FAILURE);
-}
 
 %}
 
-%token INICIO FIN LEER ESCRIBIR ASIGNACION CONSTANTE ID
+%union {
+        int constante;
+        char *identificador;
+        char *reservada;
+        char *asignacion;
+}
+
+%token <reservada> INICIO FIN LEER ESCRIBIR
+%token <constante> CONSTANTE
+%token <identificador> ID
+%token <asignacion> ASIGNACION
 
 %%
 
 objetivo: PROGRAMA { printf("Análisis sintáctico exitoso.\n"); }
-        | error { yyerror("Error en la producción objetivo."); };
+        | error { fprintf(stderr, "Error: Análisis sintáctico fallido.\n"); exit(EXIT_FAILURE); }
 
 PROGRAMA: INICIO LISTASENTENCIAS FIN;
 
@@ -30,10 +34,10 @@ SENTENCIA: ID ASIGNACION EXPRESION ';' { printf("Asignación de valor a la varia
         | ESCRIBIR '(' LISTAEXPRESIONES ')' ';';
 
 LISTAIDENTIFICADORES: ID
-                | LISTAIDENTIFICADORES ',' ID;
+        | LISTAIDENTIFICADORES ',' ID;
 
 LISTAEXPRESIONES: EXPRESION
-                | LISTAEXPRESIONES ',' EXPRESION;
+        | LISTAEXPRESIONES ',' EXPRESION;
 
 EXPRESION: PRIMARIA OPERADOR PRIMARIA;
 
@@ -46,7 +50,12 @@ OPERADOR: '+'
 
 %%
 
-int main(int argc,char **argv){
-        yyparse();
-        return 0;
+int main()
+{
+        return(yyparse());
+}
+
+void yyerror(char* s)
+{
+        fprintf(stderr, "%s\n", s);
 }

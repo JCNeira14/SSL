@@ -1,12 +1,15 @@
 %{
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
-#include <ctype.h>
-#include "parser.tab.c" // Archivo de encabezado generado por Bison
-#define EXIT_ERROR -1 // Definición de un token de error
+#include "parser.tab.h"
+extern int yylineno;
+#define EXIT_ERROR -1
 
-void error(char *elemento, int longitudElemento); // Declaración de la función de manejo de errores
+int yywrap(void);
+int yylex(void);
+void especificarError(char *elemento, int longitudElemento); // Declaración de la función de manejo de errores
+
 %}
 
 option noyywrap
@@ -20,18 +23,18 @@ constante       [0-9]+
 "fin"           { yylval.reservada = strdup(yytext); return FIN; }
 "leer"          { yylval.reservada = strdup(yytext); return LEER; }
 "escribir"      { yylval.reservada = strdup(yytext); return ESCRIBIR; }
-":="            { return ASIGNACION; }
-{constante}     { yylval.entero = atoi(yytext); return CONSTANTE; }
+":="            { yylval.asignacion = strdup(yytext); return ASIGNACION; }
+{constante}     { yylval.constante = atoi(yytext); return CONSTANTE; }
 {identificador} { yylval.identificador = strdup(yytext); return ID; }
 {espacios}      ; // Saltar espacios en blanco
-.               { error(yytext, yyleng); return EXIT_ERROR; } // Caracteres no válidos
+.               { especificarError(yytext, yyleng); return EXIT_ERROR; } // Caracteres no válidos
 
 %%
 
 // Función para manejar errores léxicos
-void error(char *elemento, int longitudElemento) {
-    // Imprimir información de error con número de línea y posición
-    fprintf(stderr, "Error en la línea %d, posición %d: ", yylineno, (int)(elemento - yytext + 1));
+void especificarError(char *elemento, int longitudElemento) {
+    // Imprimir información de especificarError con número de línea y posición
+    fprintf(stderr, "Error en la línea %d: %s\n", yylineno, elemento);
 
     // Verificar si el elemento podría ser un identificador
     if (isalpha(elemento[0]) && longitudElemento > 1) {
@@ -55,9 +58,4 @@ void error(char *elemento, int longitudElemento) {
             fprintf(stderr, "El identificador comienza con un caracter inválido.\n");
         }
     }
-}
-
-int main() {
-    yylex();
-    return 0;
 }
