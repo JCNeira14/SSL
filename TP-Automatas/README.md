@@ -28,9 +28,3 @@ Grupo 2
 * Legajo: 140.510-0
 * Apellido/s: Lembo
 * Nombre: Natalia Vanesa
-
---------------------------------------------------
-* Usuario de GitHub: RomanDV22
-* Legajo: 176.375-1
-* Apellido/s: De Vita
-* Nombre: Román
