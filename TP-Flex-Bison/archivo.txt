@@ -1,5 +1,0 @@
-inicio
-variable := 42;
-leer(variable);
-escribir(variable + 10);
-fin

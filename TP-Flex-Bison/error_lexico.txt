@@ -1,0 +1,6 @@
+inicio
+pe$%pe(hola);
+escribir(a);
+variable:=42;
+escribir(a,b,c,d);
+fin

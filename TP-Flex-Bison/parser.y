@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-extern int yylex();
+int yylex();
+int yyerror(char *s);
 
 %}
 
@@ -10,26 +11,20 @@ extern int yylex();
         int constante;
         char *identificador;
         char *reservada;
-        char *asignacion;
 }
 
 %token <reservada> INICIO FIN LEER ESCRIBIR
 %token <constante> CONSTANTE
 %token <identificador> ID
-%token <asignacion> ASIGNACION
+%token ASIGNACION
 
-%start objetivo
+%start PROGRAMA
 
 %%
-
-objetivo: PROGRAMA { printf("Análisis sintáctico exitoso.\n"); }
-        | error { fprintf(stderr, "Error: Análisis sintáctico fallido.\n"); exit(EXIT_FAILURE); };
-
-PROGRAMA: INICIO { printf("Se leyo inicio: %s\n", $1); } LISTASENTENCIAS { printf("Se leyo lista sentencias \n", $1); } FIN;
+PROGRAMA: INICIO LISTASENTENCIAS FIN;
 
 LISTASENTENCIAS:
         | SENTENCIA LISTASENTENCIAS;
-
 
 SENTENCIA: ID ASIGNACION EXPRESION ';' { printf("Asignación de valor a la variable %s.\n", $1); }
         | LEER '(' LISTAIDENTIFICADORES ')' ';' { printf("Lectura de variables\n"); }
@@ -42,23 +37,24 @@ LISTAIDENTIFICADORES: ID
 LISTAEXPRESIONES: EXPRESION
         | LISTAEXPRESIONES ',' EXPRESION;
 
-EXPRESION: PRIMARIA OPERADOR PRIMARIA;
+EXPRESION: PRIMARIA
+        | PRIMARIA '+' PRIMARIA
+        | PRIMARIA '-' PRIMARIA;
 
 PRIMARIA: ID
         | CONSTANTE
         | '(' EXPRESION ')';
-
-OPERADOR: '+'
-        | '-';
-
 %%
 
 int main()
 {
-        return(yyparse());
+        if (yyparse() == 0)
+                printf("Analisis Sintactico exitoso.\n");
+        return 0;
 }
 
-void yyerror(char* s)
+int yyerror(char* mensaje)
 {
-        fprintf(stderr,"%s\n",s);
+        fprintf(stderr,"Error Sintactico: %s\n", mensaje);
+        return 1;
 }
