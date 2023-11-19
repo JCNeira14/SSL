@@ -422,14 +422,9 @@ extern int yylineno;
 #define EXIT_ERROR -1
 
 int yylineno = 1;
-void yyterminate(void);
 int yylex(void);
-void especificarError(char *elemento, int longitudElemento); // Declaración de la función de manejo de errores
-
-
-#define YY_NO_INPUT 1
-#define YY_NO_UNPUT 1
-#line 433 "lex.yy.c"
+void especificarError(char *elemento, int longitudElemento);
+#line 428 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -580,10 +575,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 25 "scanner.l"
+#line 19 "scanner.l"
 
 
-#line 587 "lex.yy.c"
+#line 582 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -668,89 +663,87 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 27 "scanner.l"
+#line 21 "scanner.l"
 { yylval.reservada = strdup(yytext); return INICIO; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 28 "scanner.l"
+#line 22 "scanner.l"
 { yylval.reservada = strdup(yytext); return FIN; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 29 "scanner.l"
+#line 23 "scanner.l"
 { yylval.reservada = strdup(yytext); return LEER; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 30 "scanner.l"
+#line 24 "scanner.l"
 { yylval.reservada = strdup(yytext); return ESCRIBIR; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 31 "scanner.l"
+#line 25 "scanner.l"
 return '(';
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 32 "scanner.l"
+#line 26 "scanner.l"
 return ')';
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 33 "scanner.l"
+#line 27 "scanner.l"
 return ',';
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 34 "scanner.l"
+#line 28 "scanner.l"
 return '+';
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 35 "scanner.l"
+#line 29 "scanner.l"
 return '-';
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 36 "scanner.l"
+#line 30 "scanner.l"
 return ';';
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 37 "scanner.l"
+#line 31 "scanner.l"
 { return ASIGNACION; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 38 "scanner.l"
+#line 32 "scanner.l"
 { yylval.constante = atoi(yytext); return CONSTANTE; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 39 "scanner.l"
+#line 33 "scanner.l"
 { yylval.identificador = strdup(yytext); return ID; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 40 "scanner.l"
+#line 34 "scanner.l"
 ; // Saltar espacios en blanco
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 41 "scanner.l"
+#line 35 "scanner.l"
 { especificarError(yytext, yyleng); return EXIT_ERROR; } // Caracteres no válidos
-	YY_BREAK
-case YY_STATE_EOF(INITIAL):
-#line 42 "scanner.l"
-{ yyterminate(); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 44 "scanner.l"
+#line 37 "scanner.l"
 ECHO;
 	YY_BREAK
-#line 754 "lex.yy.c"
+#line 745 "lex.yy.c"
+case YY_STATE_EOF(INITIAL):
+	yyterminate();
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1634,7 +1627,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 44 "scanner.l"
+#line 37 "scanner.l"
 
 
 // Función para manejar errores léxicos

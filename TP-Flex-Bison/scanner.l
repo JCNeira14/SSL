@@ -8,20 +8,14 @@ extern int yylineno;
 #define EXIT_ERROR -1
 
 int yylineno = 1;
-void yyterminate(void);
 int yylex(void);
-void especificarError(char *elemento, int longitudElemento); // Declaración de la función de manejo de errores
-
-
+void especificarError(char *elemento, int longitudElemento);
 %}
-
 %option noyywrap
-%option noinput nounput
 
 espacios        [\t\n\r]
 identificador   [a-zA-Z][a-zA-Z0-9]{0,31}
 constante       [0-9]+
-
 %%
 
 "inicio"        { yylval.reservada = strdup(yytext); return INICIO; }
@@ -39,7 +33,6 @@ constante       [0-9]+
 {identificador} { yylval.identificador = strdup(yytext); return ID; }
 {espacios}      ; // Saltar espacios en blanco
 .               { especificarError(yytext, yyleng); return EXIT_ERROR; } // Caracteres no válidos
-<<EOF>>         { yyterminate(); }
 
 %%
 
