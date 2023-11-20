@@ -55,12 +55,14 @@ void especificarError(char *elemento, int longitudElemento) {
                 }
             }
         }
-    } else {
+    }else{
         // Manejar casos donde el elemento no es un identificador válido
         if (longitudElemento == 1) {
-            fprintf(stderr, "Carácter no válido para identificadores o constantes.\n");
+            if (isalnum(elemento[0])){
+            fprintf(stderr, "Primer carácter no válido para identificadores o constantes.\n");
+            }
         } else {
-            fprintf(stderr, "El identificador comienza con un caracter inválido.\n");
+            fprintf(stderr, "El identificador comienza con un caracter especial.\n");
         }
     }
 }
