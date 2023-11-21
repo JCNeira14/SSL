@@ -1,8 +1,4 @@
 inicio
-    leer A;
-    B := A - 45 + B; 
-    escribir (B);
-
-    BOOL B; //error léxico
-fin;
-
+    b := (6 – 45);
+    4variable := 14;//error léxico: los identificadores deben comenzar con una letra
+fin
